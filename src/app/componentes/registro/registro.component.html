@@ -1,0 +1,55 @@
+
+<div class="container container-fluid">
+    <div class="form-group-attached">
+        <div class="row-clearfix">
+        <div class="col-md-6 offset-md-3">
+            <form #f="ngForm" (ngSubmit)="registrar()">
+                <div class="form-group-attached"> 
+                    <label>Nombre: </label>
+                    <input type="text" class="form-control" placeholder="Ingrese su nombre" name="nombre" [(ngModel)]="registroClienteDTO.nombre" />
+                </div>
+                <div class="form-group-attached">
+                    <label>Foto: </label>
+                    <input type="file" class="form-control" accept="image/png, image/jpeg" name="fotoPerfil" placeholder="Seleccione su foto de perfil" required [(ngModel)]="registroClienteDTO.fotoPerfil" (change)="onFileChange($event)" />
+                </div>
+                <div>
+                    <label>Ciudad: </label>
+                    <select name="ciudadResidencia" class="form-control" required [(ngModel)]="registroClienteDTO.ciudadResidencia" >
+                    <option value="" selected >-- Seleccione una ciudad --</option>
+                        @for (item of ciudades; track $index) 
+                        { 
+                            <option [value]="item" >{{item}}</option> 
+                        }
+                    </select>
+                    </div>
+                <div class="form-group-attached">
+                    <label>Username: </label>
+                    <input type="text" class="form-control" placeholder="Ingrese su nombre de usuario" name="nickname" [(ngModel)]="registroClienteDTO.nickname" />
+                </div>
+                <div>
+                    <label>Correo electrónico: </label>
+                    <input type="email" class="form-control" placeholder="Ingrese su correo" name="email" [(ngModel)]="registroClienteDTO.email" />
+                </div>
+                <div>
+                    <label>Contraseña: </label>
+                    <input type="password" class="form-control" placeholder="Ingrese su contraseña" name="password" [(ngModel)]="registroClienteDTO.password" />
+                </div>
+                <div>
+                    <label >Repetir contraseña: </label>
+                    <input type="password" class="form-control" placeholder="Confirme su contraseña" name="confirmaPassword"
+                    [(ngModel)]="registroClienteDTO.confirmaPassword" required />
+                </div>
+                @if (!sonIguales()) { 
+                    <div class="alert alert-danger" role="alert" >Las contraseñas no coinciden </div> 
+                }
+                <hr>
+                <button type="submit" class="btn btn-info" [disabled]="f.invalid || !sonIguales()">
+                    <i class="fa fa-save"></i> Registrarse
+                </button>
+            </form>
+        </div>
+    </div>
+    </div>
+    
+</div>
+
