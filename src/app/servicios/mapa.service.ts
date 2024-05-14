@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs';
 import { ItemNegocioDTO } from '../dto/item-negocio-dto';
+import mapboxgl from 'mapbox-gl';
 
-declare var mapboxgl: any;
 
 @Injectable({
   providedIn: 'root'
@@ -10,28 +10,28 @@ declare var mapboxgl: any;
 export class MapaService {
 
   mapa: any;
-  style: string = 'mapbox://styles/mapbox/streets-v11';
   directions: any;
   marcadores: any[];
 
   constructor() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoianVhbnNlLW1hcCIsImEiOiJjbHZzeHF6eHYxNW1zMmtxdGRsdXMxbDF1In0.VZSu_X9S8hM8Eoqq9rid5Q';
     this.marcadores = [];
   }
-  public crearMapa() {
-    console.log('Ejecuta creacion');
+  
+  public crearMapa() 
+  {
     this.mapa = new mapboxgl.Map({
-      container: 'mapa',
-      style: this.style,
-      center: [-72.309, 4.473],
-      zoom: 4.5
+    accessToken: 'pk.eyJ1IjoianVhbnNlLW1hcCIsImEiOiJjbHZzeHF6eHYxNW1zMmtxdGRsdXMxbDF1In0.VZSu_X9S8hM8Eoqq9rid5Q',
+    container: 'mapa',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-75.6258, 4.4053],
+    zoom: 9
     });
     this.mapa.addControl(new mapboxgl.NavigationControl());
     this.mapa.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: { enableHighAccuracy: true },
-        trackUserLocation: true
-      })
+    new mapboxgl.GeolocateControl({
+    positionOptions: { enableHighAccuracy: true },
+    trackUserLocation: true
+    })
     );
   }
 
@@ -46,7 +46,7 @@ export class MapaService {
           .setLngLat([e.lngLat.lng, e.lngLat.lat])
           .addTo(mapaGlobal);
         marcadores.push(marcador);
-        observer.next(marcador._lngLat);
+        observer.next(marcador.getLngLat());
       });
 
     });

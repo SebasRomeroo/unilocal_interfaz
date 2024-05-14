@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './componentes/inicio/inicio.component';
-import { LoginComponent } from './componentes/login/login.component';
-import { RegistroComponent } from './componentes/registro/registro.component';
-import { GestionNegocioComponent } from './componentes/gestion-negocio/gestion-negocio.component';
+import { LoginComponent } from './componentes/publico/login/login.component';
+import { RegistroComponent } from './componentes/cliente/registro/registro.component';
+import { GestionNegocioComponent } from './componentes/negocio/gestion-negocio/gestion-negocio.component';
+import { CrearNegocioComponent } from './componentes/negocio/crear-negocio/crear-negocio.component';
+import { DetalleNegocioComponent } from './componentes/negocio/detalle-negocio/detalle-negocio.component';
 
 
 export const routes: Routes = [
@@ -10,5 +12,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
     { path: 'gestionNegocio', component: GestionNegocioComponent },
+    { path: "crear-negocio", component: CrearNegocioComponent },
+    { path: "detalle-negocio/:codigo", component: DetalleNegocioComponent },
     { path: "**", pathMatch: "full", redirectTo: "" }
     ];

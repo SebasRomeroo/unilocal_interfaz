@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RegistroClienteDTO } from '../../dto/registro-cliente-dto';
+import { RegistroClienteDTO } from '../../../dto/registro-cliente-dto';
 import { FormsModule } from '@angular/forms';
 
 @Component({
