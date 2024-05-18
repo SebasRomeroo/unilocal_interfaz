@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HorarioDTO } from '../../../dto/horario-dto';
 import { NegociosService } from '../../../servicios/negocios.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RegistroNegocioDTO } from '../../../dto/registro-negocio-dto';
+import { MapaService } from '../../../servicios/mapa.service';
 
 @Component({
   selector: 'app-crear-negocio',
@@ -12,14 +13,16 @@ import { RegistroNegocioDTO } from '../../../dto/registro-negocio-dto';
   templateUrl: './crear-negocio.component.html',
   styleUrl: './crear-negocio.component.css'
 })
-export class CrearNegocioComponent {
+export class CrearNegocioComponent implements OnInit {
   registroNegocioDTO: RegistroNegocioDTO;
   horarios: HorarioDTO[];
   archivos!:FileList;
 
-  constructor(private negociosService: NegociosService) {
+  constructor(private negociosService: NegociosService, private mapaService: MapaService) {
     this.registroNegocioDTO = new RegistroNegocioDTO();
     this.horarios = [ new HorarioDTO() ];
+
+
   }
 
   public crearNegocio() {
@@ -38,4 +41,15 @@ export class CrearNegocioComponent {
       this.registroNegocioDTO.fotoPerfil = this.archivos[0].name;
     }
   }
+
+  ngOnInit(): void {
+    
+    this.mapaService.crearMapa();
+
+    this.mapaService.agregarMarcador().subscribe((marcador) => {
+      console.log("Alerta",marcador);
+      this.registroNegocioDTO.ubicacion.latitud = marcador.lat;
+      this.registroNegocioDTO.ubicacion.longitud = marcador.lng;
+    });
+    }
 }

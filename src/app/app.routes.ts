@@ -5,6 +5,7 @@ import { RegistroComponent } from './componentes/cliente/registro/registro.compo
 import { GestionNegocioComponent } from './componentes/negocio/gestion-negocio/gestion-negocio.component';
 import { CrearNegocioComponent } from './componentes/negocio/crear-negocio/crear-negocio.component';
 import { DetalleNegocioComponent } from './componentes/negocio/detalle-negocio/detalle-negocio.component';
+//import { BusquedaComponent } from './componentes/busqueda/busqueda.component';
 
 
 export const routes: Routes = [
@@ -14,5 +15,6 @@ export const routes: Routes = [
     { path: 'gestionNegocio', component: GestionNegocioComponent },
     { path: "crear-negocio", component: CrearNegocioComponent },
     { path: "detalle-negocio/:codigo", component: DetalleNegocioComponent },
+ //   { path: "busqueda/:texto", component: BusquedaComponent },
     { path: "**", pathMatch: "full", redirectTo: "" }
     ];

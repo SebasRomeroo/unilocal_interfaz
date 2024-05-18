@@ -32,4 +32,13 @@ export class NegociosService {
   public eliminar(codigo: string) {
     this.negocios = this.negocios.filter(n => n.codigoNegocio !== codigo);
   }
+
+  public buscar(palabra: string): ItemNegocioDTO[] {
+    if (!palabra) {
+      return [];
+    }
+
+    const palabraLowerCase = palabra.toLowerCase();
+    return this.negocios.filter(negocio => negocio.nombre.toLowerCase().includes(palabraLowerCase));
+  }
 }
