@@ -44,9 +44,10 @@
                     <select name="tipo" required class="form-select" [(ngModel)]="registroNegocioDTO.tipoNegocio">
 
                         <option value="" selected>Seleccione un tipo para el negocio</option>
-                        <!-- Completar (se puede basar en cómo se cargan las ciudades del
-    
-    formulario de registro de clientes) -->
+                        @for (item of tiposNegocio; track $index) 
+                        { 
+                            <option [value]="item" >{{item}}</option> 
+                        }
 
                     </select>
                 </div>

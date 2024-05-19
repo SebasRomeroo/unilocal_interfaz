@@ -17,6 +17,6 @@ export class PublicoService {
   }
 
     public listarTiposNegocio(): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.publicoURL}/listar-tipos-negocio`);
+    return this.http.get<MensajeDTO>(`${this.publicoURL}/listar-tipoNegocio`);
   }
 }

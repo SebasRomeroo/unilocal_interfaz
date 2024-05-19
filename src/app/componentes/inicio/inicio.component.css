@@ -1,5 +1,24 @@
 #mapa{
-    width: 600px;
-    height: 450px;
-    margin-top: 20px;
+    width: 1300px;
+    height: 500px;
+    margin-top: 0px;
+}
+
+/* body-content.component.css */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px; /* Puedes ajustar el padding según tus necesidades */
+    box-sizing: border-box;
 }

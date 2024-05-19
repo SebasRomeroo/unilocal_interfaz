@@ -5,6 +5,7 @@ import $ from 'jquery';
 import { LoginDTO } from '../../dto/login-dto';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
   cambio: any;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private tokenService: TokenService
   )
   {
     this.loginDTO = new LoginDTO();
@@ -45,7 +47,7 @@ export class HeaderComponent implements OnInit {
         this.loginCliente();
         break;
       case 'Moderador':
-        console.log('Ingresa como moderador');
+        this.loginModerador();
         break;
       default:
         alert('Seleccione un tipo de usuario');  
@@ -62,7 +64,20 @@ export class HeaderComponent implements OnInit {
   public loginCliente(){
     this.authService.loginCliente(this.loginDTO).subscribe({
       next: (data) => {
-      console.log(data, 'respuesta Login');
+        this.tokenService.loginCliente(data.respuesta.token);
+        $("#staticBackdrop").hide();
+      },
+      error: (error) => {
+      console.log("Error al cargar las ciudades");
+      }
+      });
+  }
+
+  public loginModerador(){
+    this.authService.loginModerador(this.loginDTO).subscribe({
+      next: (data) => {
+        this.tokenService.loginModerador(data.respuesta.token);
+        $("#staticBackdrop").hide();
       },
       error: (error) => {
       console.log("Error al cargar las ciudades");

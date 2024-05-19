@@ -21,9 +21,14 @@ export class TokenService {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 
-  public login(token: string) {
+  public loginCliente(token: string) {
     this.setToken(token);
-    this.router.navigate(["/"]);
+    this.router.navigate(["/gestionNegocio"]);
+  }
+
+  public loginModerador(token: string) {
+    this.setToken(token);
+    this.router.navigate(["/gestionNegocio"]);
   }
 
   public logout() {

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RegistroNegocioDTO } from '../../../dto/registro-negocio-dto';
 import { MapaService } from '../../../servicios/mapa.service';
+import { PublicoService } from '../../../servicios/publico.service';
 
 @Component({
   selector: 'app-crear-negocio',
@@ -17,10 +18,13 @@ export class CrearNegocioComponent implements OnInit {
   registroNegocioDTO: RegistroNegocioDTO;
   horarios: HorarioDTO[];
   archivos!:FileList;
+  tiposNegocio: string[];
 
-  constructor(private negociosService: NegociosService, private mapaService: MapaService) {
+  constructor(private negociosService: NegociosService, private mapaService: MapaService, private publicoService: PublicoService) {
     this.registroNegocioDTO = new RegistroNegocioDTO();
     this.horarios = [ new HorarioDTO() ];
+    this.tiposNegocio= [];
+    this.cargarTiposNegocio();
 
 
   }
@@ -41,6 +45,17 @@ export class CrearNegocioComponent implements OnInit {
       this.registroNegocioDTO.fotoPerfil = this.archivos[0].name;
     }
   }
+
+  private cargarTiposNegocio() {
+    this.publicoService.listarTiposNegocio().subscribe({
+    next: (data) => {
+    this.tiposNegocio = data.respuesta;
+    },
+    error: (error) => {
+    console.log("Error al cargar las ciudades");
+    }
+    });
+    }
 
   ngOnInit(): void {
     
