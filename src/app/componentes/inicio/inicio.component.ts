@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MapaService } from '../../servicios/mapa.service';
 import { Router } from '@angular/router';
 import { Alerta } from '../../dto/alerta';
+import { LoginComponent } from '../publico/login/login.component';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [],
+  imports: [LoginComponent],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css'
 })
