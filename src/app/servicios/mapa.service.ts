@@ -22,7 +22,8 @@ export class MapaService {
     this.mapa = new mapboxgl.Map({
     accessToken: 'pk.eyJ1IjoianVhbnNlLW1hcCIsImEiOiJjbHZzeHF6eHYxNW1zMmtxdGRsdXMxbDF1In0.VZSu_X9S8hM8Eoqq9rid5Q',
     container: 'mapa',
-    style: 'mapbox://styles/mapbox/streets-v11',
+    //style: 'mapbox://styles/mapbox/streets-v11',
+    style: 'mapbox://estilos/mapbox/satellite-streets-v12',
     center: [-75.6258, 4.4053],
     zoom: 9
     });

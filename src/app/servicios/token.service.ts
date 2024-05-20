@@ -9,8 +9,15 @@ const TOKEN_KEY = "AuthToken";
 })
 export class TokenService {
 
-  constructor(private router: Router) { }
+  interfazCliente: boolean = false;
+  interfazModerador: boolean = false;
+  token : string='';
 
+  constructor(private router: Router) {
+   // this.token='';
+   }
+
+  
   public setToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
@@ -33,7 +40,36 @@ export class TokenService {
 
   public logout() {
     window.sessionStorage.clear();
-    this.router.navigate(["/login"]);
+    this.router.navigate(["/inicio"]);
+  }
+
+  public obtenerRol(): string
+  {
+    const token = this.getToken();
+    if (token) {
+      const values= this.decodePayload(token);
+      return values.rol;
+    }
+
+    return '';
+  }
+
+  public getCodigo(): string {
+    const token = this.getToken();
+    if (token) {
+    const values = this.decodePayload(token);
+    return values.id;
+    }
+    return "";
+  }
+
+  public getNombre(): string {
+    const token = this.getToken();
+    if (token) {
+    const values = this.decodePayload(token);
+    return values.nombre;
+    }
+    return "";
   }
 
   private decodePayload(token: string): any {

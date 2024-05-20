@@ -18,7 +18,7 @@ export class RegistroComponent {
   registroClienteDTO: RegistroClienteDTO;
   ciudades: string[]; 
   archivos!:FileList;
-  alerta: Alerta;
+  alerta!:Alerta;
   
   constructor(private publicoService: PublicoService, private authService: AuthService) {
     this.registroClienteDTO = new RegistroClienteDTO();

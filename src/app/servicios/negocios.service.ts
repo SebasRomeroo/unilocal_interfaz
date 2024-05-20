@@ -2,22 +2,27 @@ import { Injectable } from '@angular/core';
 import { UbicacionDTO } from '../dto/ubicacion-dto';
 import { ItemNegocioDTO } from '../dto/item-negocio-dto';
 import { RegistroNegocioDTO } from '../dto/registro-negocio-dto';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { MensajeDTO } from '../dto/mensaje-dto';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NegociosService {
 
+  private negociosAPI = "http://localhost:8080/api/negociosAPI";
+
   negocios: ItemNegocioDTO[];
-  constructor() {
+  constructor(
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) {
     this.negocios = [];
-    this.negocios.push(new ItemNegocioDTO('1', 'Bar Armenia', 'https://picsum.photos/100','BAR', new UbicacionDTO(4.531456060381842, -75.68035469963664), 4.5, 'APROBADO'));
-    this.negocios.push(new ItemNegocioDTO('2', 'Restaurante La Casona','https://picsum.photos/100', 'RESTAURANTE', new UbicacionDTO(4.551298538672697,-75.65858458442557), 4.0, 'APROBADO'));
-    this.negocios.push(new ItemNegocioDTO('3', 'Peluquería La 33', 'https://picsum.photos/100','PELUQUERIA', new UbicacionDTO(4.541984423452234, -75.68579829641877), 4.0, 'RECHAZADO'));
-    this.negocios.push(new ItemNegocioDTO('4', 'Veterinaria Los Amigos','https://picsum.photos/100', 'VETERINARIA', new UbicacionDTO(4.539872786267409,-75.65011488244343), 4.0, 'APROBADO'));
   }
-  public listar(): ItemNegocioDTO[] {
-    return this.negocios;
+  public listarNegocios() {
+    let params = new HttpParams().set('codigo', this.tokenService.getCodigo());
+    return this.http.get<MensajeDTO>(`${this.negociosAPI}/mis-negocios`,{params});
   }
   public obtener(codigo: string): ItemNegocioDTO | undefined {
     return this.negocios.find(negocios => negocios.codigoNegocio == codigo);

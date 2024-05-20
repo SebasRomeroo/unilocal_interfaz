@@ -1,30 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NegociosService } from '../../../servicios/negocios.service';
 import { ItemNegocioDTO } from '../../../dto/item-negocio-dto';
 import { RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../../../servicios/token.service';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-gestion-negocio',
   standalone: true,
-  imports: [RouterLink, CommonModule, RouterModule],
+  imports: [RouterLink, CommonModule, RouterModule, HeaderComponent],
   templateUrl: './gestion-negocio.component.html',
   styleUrl: './gestion-negocio.component.css'
 })
-export class GestionNegocioComponent {
+export class GestionNegocioComponent implements OnInit {
 
   seleccionados: ItemNegocioDTO[];
   textoBtnEliminar: string;
 
   negocios: ItemNegocioDTO[];
-  constructor(private negocioService: NegociosService) {
-    this.negocios = [];
+  router: any;
+  constructor(
+    private negocioService: NegociosService,
+    private tokenService: TokenService
+  ) {
+    this.negocios= [];
+    this.router ='';
     this.seleccionados = [];
     this.textoBtnEliminar = '';
     this.listarNegocios();
   }
+  ngOnInit(): void {
+    
+  }
   public listarNegocios() {
-    this.negocios = this.negocioService.listar();
+    this.negocioService.listarNegocios().subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+        //this.alerta = new Alerta(error.error.respuesta, "danger");
+      }
+    });
   }
 
   public seleccionar(producto: ItemNegocioDTO, estado: boolean) {
@@ -57,4 +75,5 @@ export class GestionNegocioComponent {
     this.seleccionados = [];
     this.actualizarMensaje();
   }
+
 }

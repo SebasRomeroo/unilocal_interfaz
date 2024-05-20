@@ -6,11 +6,13 @@ import { LoginDTO } from '../../dto/login-dto';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
 import { TokenService } from '../../servicios/token.service';
+import { Alerta } from '../../dto/alerta';
+import { AlertaComponent } from '../alerta/alerta.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, LoginComponent, FormsModule],
+  imports: [RouterLink, LoginComponent, FormsModule, AlertaComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -18,70 +20,49 @@ export class HeaderComponent implements OnInit {
 
   loginDTO: LoginDTO;
   cambio: any;
+  router: any;
+  alerta!:Alerta;
+
+  isLoggedIn = false;
+  userRole: string | null = null;
+  userName: string | null = null;
 
   constructor(
-    private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authService: AuthService
   )
   {
     this.loginDTO = new LoginDTO();
+    this.alerta= new Alerta("","");
   }
 
-  public mostrarPassword() {
-		this.cambio = document.getElementById("txtPassword");
-		if(this.cambio.type == "password"){
-			this.cambio.type = "text";
-			$('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-		}else{
-			this.cambio.type = "password";
-			$('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-		}
-	} 
 
-
-  public iniciarSesion(){
-    //Validar checkbox seleccionado
-    const tipoUsuario = $('input[name="tipoUsuario"]:checked').val();
-    switch(tipoUsuario){
-      case 'Cliente':
-        this.loginCliente();
-        break;
-      case 'Moderador':
-        this.loginModerador();
-        break;
-      default:
-        alert('Seleccione un tipo de usuario');  
-    }
-    //Detonar servicio de Login
-  }
 
   ngOnInit(): void {
-    $(document).ready(() => {
-      console.log('jQuery is ready');
+    this.authService.isLoggedIn.subscribe((loggedIn) => {
+      this.isLoggedIn = loggedIn;
+    });
+
+    this.authService.role.subscribe((rol) => {
+      this.userRole = rol;
+    });
+
+    this.authService.nombreUsuario.subscribe((nombre) => {
+      this.userName = nombre;
     });
   }
 
-  public loginCliente(){
-    this.authService.loginCliente(this.loginDTO).subscribe({
-      next: (data) => {
-        this.tokenService.loginCliente(data.respuesta.token);
-        $("#staticBackdrop").hide();
-      },
-      error: (error) => {
-      console.log("Error al cargar las ciudades");
-      }
-      });
+
+  public irARegistrarse()
+  {
+    this.router.navigate(['/registro']);
   }
 
-  public loginModerador(){
-    this.authService.loginModerador(this.loginDTO).subscribe({
-      next: (data) => {
-        this.tokenService.loginModerador(data.respuesta.token);
-        $("#staticBackdrop").hide();
-      },
-      error: (error) => {
-      console.log("Error al cargar las ciudades");
-      }
-      });
+  public cerrarSesion()
+  {
+    console.log('Ejecuta cerrar sesion');
+    this.authService.noLogged();
   }
+
+  
 }

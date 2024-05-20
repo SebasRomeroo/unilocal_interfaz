@@ -1,31 +1,110 @@
-<!-- Button trigger modal -->
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-    <div class="modal-dialog d-flex justify-content-center">
-        <div class="modal-content w-75">
+<!--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Sign in</h5>
-                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="staticBackdropLabel">Iniciar Sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body p-4">
-                <form>
-                    <!-- Email input -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="email" id="email1" class="form-control" />
-                        <label class="form-label" for="email1">Email address</label>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <label>Ingrese Correo</label>
+                        <input type="text" class="form-control" placeholder="example@gmail.com" [(ngModel)]="loginDTO.email">
                     </div>
-
-                    <!-- password input -->
-                    <div data-mdb-input-init class="form-outline mb-4">
-                        <input type="password" id="password1" class="form-control" />
-                        <label class="form-label" for="password1">Password</label>
+                    <div class="col-md-12 col-sm-12">
+                        <label>Ingrese Contraseña</label>
+                        <div class="input-group">
+                            <input ID="txtPassword" type="Password" Class="form-control" [(ngModel)]="loginDTO.password">
+                            <div class="input-group-append">
+                                <button id="show_password" class="btn btn-primary" type="button"
+                                (click)="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Submit button -->
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block">Login</button>
-                </form>
+                    <div class="col-md-12 col-sm-12">
+                        <label>Tipo Usuario</label>
+                        <div class="form-check">
+                            <input class="form-check-input" name="tipoUsuario" value="Cliente" type="radio" id="radio_cliente" />
+                            <label class="form-check-label" for="radio_cliente"> Cliente </label>
+                            
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="tipoUsuario" value="Moderador" type="radio" id="radio_moderador" />
+                            <label class="form-check-label" for="radio_moderador"> Moderador </label>
+                </div>
+                <hr>
+                <a routerLink="/registro" style=" text-align: center;"> <i class="fa fa-users"></i> Registrarse</a> <br>
+                <a routerLink="/rcuperarContraseña" style=" text-align: center;"> <i class="fa fa-password"></i> ¿Ha olvidado su contraseña?</a>
+                <app-alerta [alerta]="alerta"></app-alerta>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="iniciarSesion()" class="btn btn-secondary">Entrar</button>
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!-- Modal -->
+
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                    class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <label>Ingrese Correo</label>
+                            <input type="text" class="form-control" placeholder="example@gmail.com"
+                                [(ngModel)]="loginDTO.email">
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <label>Ingrese Contraseña</label>
+                            <div class="input-group">
+                                <input ID="txtPassword" type="Password" Class="form-control"
+                                    [(ngModel)]="loginDTO.password">
+                                <div class="input-group-append">
+                                    <button id="show_password" class="btn btn-primary" type="button"
+                                        (click)="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <label>Tipo Usuario</label>
+                            <div class="form-check">
+                                <input class="form-check-input" name="tipoUsuario" value="Cliente" type="radio"
+                                    id="radio_cliente" />
+                                <label class="form-check-label" for="radio_cliente"> Cliente </label>
+
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="tipoUsuario" value="Moderador" type="radio"
+                                    id="radio_moderador" />
+                                <label class="form-check-label" for="radio_moderador"> Moderador </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+
+                            <a routerLink="/registro" style=" text-align: center;"> <i class="fa fa-users"></i>
+                                Registrarse</a> <br>
+                            <a routerLink="/rcuperarContraseña" style=" text-align: center;"> <i
+                                    class="fa fa-password"></i> ¿Ha olvidado su contraseña?</a>
+                            <app-alerta [alerta]="alerta"></app-alerta>
+                        </div>
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                                (click)="iniciarSesion()">Entrar</button>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
