@@ -1,1 +1,51 @@
-<p>{{negocio | json}}</p>
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8">
+        <h2>{{ negocio?.nombre }}</h2>
+        <img src="{{ negocio?.imagenDestacada }}" class="img-fluid" alt="{{ negocio?.nombre }}">
+        <div class="mt-3">
+          <h4>Datos del negocio</h4>
+          <p><strong>Código:</strong> {{ negocio?.codigoNegocio }}</p>
+          <p><strong>Tipo de negocio:</strong> {{ negocio?.tipoNegocio }}</p>
+          <p><strong>Calificación promedio:</strong> {{ negocio?.calificacionPromedio }}</p>
+          <p><strong>Estado:</strong> 
+            <span [ngClass]="{'badge badge-success': negocio?.estadoNegocio == 'APROBADO', 'badge badge-danger': negocio?.estadoNegocio == 'RECHAZADO', 'badge badge-warning': negocio?.estadoNegocio == 'PENDIENTE' }">
+              {{ negocio?.estadoNegocio }}
+            </span>
+          </p>
+        </div>
+        <hr>
+       <div class="calificacion mt-3">
+            
+          <h4>Califica este negocio</h4>
+            <div class="estrellas">
+              
+            </div>
+          </div>
+      </div>
+      <!-- Sección de comentarios -->
+
+      <hr class="mt-3" >
+      <h4>Comentarios</h4>
+      <div class="comentarios-container mt-3" *ngFor="let comentario of negocio?.comentarios">
+        <h4>Comentarios</h4>
+        <p>{{ comentario.mensaje }}</p>
+      </div>
+
+      <!-- Formulario para agregar comentarios -->
+      <hr>
+      <h4>Agregar Comentario</h4>
+        
+        <div class="form-group">
+        <textarea class="form-control" [(ngModel)]="nuevoComentario" placeholder="Escribe tu comentario aquí"></textarea>
+        </div>
+        <div class="form-group mt-2"> <!-- Añadimos margen en la parte superior del botón para separarlo del área de texto -->
+            <button class="btn btn-primary btn-sm d-block mx-auto">Enviar Comentario</button> <!-- Utilizamos 'mx-auto' para centrar el botón horizontalmente -->
+        </div>
+
+      <div class="col-md-4">
+        <h4>Ubicación</h4>
+        <div id="mapa"></div>
+</div>
+
+

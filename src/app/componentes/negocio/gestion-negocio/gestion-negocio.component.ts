@@ -33,17 +33,17 @@ export class GestionNegocioComponent implements OnInit {
   ngOnInit(): void {
     
   }
-  public listarNegocios() {
-    this.negocioService.listarNegocios().subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (error) => {
-        console.log(error);
-        //this.alerta = new Alerta(error.error.respuesta, "danger");
-      }
+  public listarNegocios(){
+    const codigoCliente = this.tokenService.getCodigo();
+    this.negocioService.listarNegociosPropietario(codigoCliente).subscribe({
+    next: (data) => {
+    this.negocios = data.respuesta;
+    },
+    error: (error) => {
+    console.error(error);
+    }
     });
-  }
+    }
 
   public seleccionar(producto: ItemNegocioDTO, estado: boolean) {
     if (estado) {
@@ -69,8 +69,8 @@ export class GestionNegocioComponent implements OnInit {
 
   public borrarNegocios() {
     this.seleccionados.forEach(n => {
-    this.negocioService.eliminar(n.codigoNegocio);
-    this.negocios = this.negocios.filter(negocio => negocio.codigoNegocio !== n.codigoNegocio);
+    this.negocioService.eliminar(n.codigo);
+    this.negocios = this.negocios.filter(negocio => negocio.codigo !== n.codigo);
     });
     this.seleccionados = [];
     this.actualizarMensaje();

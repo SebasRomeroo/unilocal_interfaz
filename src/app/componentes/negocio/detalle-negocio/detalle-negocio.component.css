@@ -1,0 +1,33 @@
+/* Personalización del estado "APROBADO" */
+.aprobado {
+    background-color: green; /* Cambiar el color del texto a verde */
+    margin-left: 10px; /* Añadir un margen a la izquierda para separarlo de los dos puntos */
+    }
+
+#mapa{
+    width: 600px;
+    height: 450px;
+    margin-top: 20px;
+}
+
+.estrellas {
+    display: flex;
+    gap: 5px;
+    font-size: 1em;
+    }
+
+.fa-star {
+    cursor: pointer;
+}
+
+.fa-star.text-warning {
+    color: #ffc107; /* Bootstrap's warning color for selected stars */
+}
+
+.comentarios-container {
+    margin-top: 20px; /* Puedes ajustar el valor según sea necesario */
+}
+
+.calificacion {
+    margin-top: 20px; /* Ajusta el valor según sea necesario */
+}
