@@ -1,5 +1,4 @@
 import { UbicacionDTO } from "./ubicacion-dto";
-import { ItemComentarioDTO } from "./item-comentario-dto";
 
 export class ItemNegocioDTO {
     constructor(
@@ -7,6 +6,8 @@ export class ItemNegocioDTO {
     public nombre: string = '',
     public fotoPerfil: string = '',
     public tipoNegocio: string = '',
-    public estadoNegocio:string = ''
+    public estadoNegocio:string = '',
+    public ubicacion: UbicacionDTO = new UbicacionDTO(0,0),
+    
     ){}
 }
