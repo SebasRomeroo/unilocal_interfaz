@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UbicacionDTO } from '../dto/ubicacion-dto';
-import { ItemNegocioDTO } from '../dto/item-negocio-dto';
 import { RegistroNegocioDTO } from '../dto/registro-negocio-dto';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MensajeDTO } from '../dto/mensaje-dto';
@@ -14,7 +12,8 @@ import { ActualizacionNegocioDTO } from '../dto/actualizacion-negocio-dto';
 export class NegociosService {
   
   // private negocios = ItemNegocioDTO[];
-  private negociosURL = "http://localhost:8080/api/negociosAPI";
+  private negociosURL = "http://localhost:8080/api/negocios";
+  private publicoURL = "http://localhost:8080/api/publico";
 
   constructor(private http: HttpClient,private tokenService: TokenService) { 
 
@@ -22,7 +21,7 @@ export class NegociosService {
   }
 
   public crear(negocioNuevo: RegistroNegocioDTO): Observable<MensajeDTO> {
-    return this.http.post<MensajeDTO>(`${this.negociosURL}/crear`, negocioNuevo);
+    return this.http.post<MensajeDTO>(`${this.negociosURL}/crear-negocio`, negocioNuevo);
   }
   public listarNegocios() {
     let params = new HttpParams().set('codigoCliente', this.tokenService.getCodigo());
@@ -47,6 +46,10 @@ export class NegociosService {
   
   public listarNegociosPropietario(codigoCliente: string): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.negociosURL}/listar-negocios/${codigoCliente}`);
+  }
+
+  public listarPorEstado(estado: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.negociosURL}/listar-por-estado/${estado}`);
   }
 
   /*public buscar(palabra: string): ItemNegocioDTO[] {

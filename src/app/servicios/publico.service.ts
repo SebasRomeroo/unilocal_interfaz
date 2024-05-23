@@ -16,7 +16,11 @@ export class PublicoService {
     return this.http.get<MensajeDTO>(`${this.publicoURL}/listar-ciudades`);
   }
 
-    public listarTiposNegocio(): Observable<MensajeDTO> {
+  public listarTiposNegocio(): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.publicoURL}/listar-tipoNegocio`);
+  }
+
+  public listarAprobados(estado: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.publicoURL}/listar-aprobados/${estado}`);
   }
 }

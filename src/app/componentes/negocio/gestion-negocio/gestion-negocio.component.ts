@@ -43,7 +43,7 @@ export class GestionNegocioComponent implements OnInit {
     console.error(error);
     }
     });
-    }
+  }
 
   public seleccionar(producto: ItemNegocioDTO, estado: boolean) {
     if (estado) {

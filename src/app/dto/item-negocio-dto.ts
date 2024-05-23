@@ -7,7 +7,7 @@ export class ItemNegocioDTO {
     public fotoPerfil: string = '',
     public tipoNegocio: string = '',
     public estadoNegocio:string = '',
-    public ubicacion: UbicacionDTO = new UbicacionDTO(0,0),
+    public ubicacion: UbicacionDTO = new UbicacionDTO(0,0)
     
     ){}
 }

@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { RegistroNegocioDTO } from '../../../dto/registro-negocio-dto';
 import { MapaService } from '../../../servicios/mapa.service';
 import { PublicoService } from '../../../servicios/publico.service';
+import { Alerta } from '../../../dto/alerta';
+import { AlertaComponent } from '../../alerta/alerta.component';
 
 @Component({
   selector: 'app-crear-negocio',
   standalone: true,
-  imports: [FormsModule, CommonModule ],
+  imports: [FormsModule, CommonModule,AlertaComponent ],
   templateUrl: './crear-negocio.component.html',
   styleUrl: './crear-negocio.component.css'
 })
@@ -19,19 +21,32 @@ export class CrearNegocioComponent implements OnInit {
   horarios: HorarioDTO[];
   archivos!:FileList;
   tiposNegocio: string[];
+  alerta !: Alerta;
 
   constructor(private negociosService: NegociosService, private mapaService: MapaService, private publicoService: PublicoService) {
     this.registroNegocioDTO = new RegistroNegocioDTO();
     this.horarios = [ new HorarioDTO() ];
     this.tiposNegocio= [];
     this.cargarTiposNegocio();
+    this.alerta= new Alerta("","");
 
 
   }
 
   public crearNegocio() {
-    this.registroNegocioDTO.horarios = this.horarios;
-    this.negociosService.crear(this.registroNegocioDTO);
+    
+    // if (this.registroClienteDTO.fotoPerfil != "") {
+      this.negociosService.crear(this.registroNegocioDTO).subscribe({
+      next: (data) => {
+      this.alerta = new Alerta(data.respuesta, "success");
+      },
+      error: (error) => {
+      this.alerta = new Alerta(error.error.respuesta, "danger");
+      }
+      });
+      //} else {
+      this.alerta = new Alerta("Debe subir una imagen", "danger");
+      //}
     console.log(this.registroNegocioDTO);
   }
   

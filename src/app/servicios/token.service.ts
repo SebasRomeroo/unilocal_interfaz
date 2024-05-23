@@ -35,7 +35,7 @@ export class TokenService {
 
   public loginModerador(token: string) {
     this.setToken(token);
-    this.router.navigate(["/gestionNegocio"]);
+    this.router.navigate(["/aprobarNegocio"]);
   }
 
   public logout() {
