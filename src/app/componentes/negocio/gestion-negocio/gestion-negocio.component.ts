@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NegociosService } from '../../../servicios/negocios.service';
 import { ItemNegocioDTO } from '../../../dto/item-negocio-dto';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../../../servicios/token.service';
 import { HeaderComponent } from '../../header/header.component';
@@ -20,13 +20,12 @@ export class GestionNegocioComponent implements OnInit {
   textoBtnEliminar: string;
 
   negocios: ItemNegocioDTO[];
-  router: any;
+
   constructor(
     private negocioService: NegociosService,
-    private tokenService: TokenService
+    private tokenService: TokenService, private router: Router
   ) {
     this.negocios= [];
-    this.router ='';
     this.seleccionados = [];
     this.textoBtnEliminar = '';
     this.listarNegocios();
@@ -75,6 +74,11 @@ export class GestionNegocioComponent implements OnInit {
     });
     this.seleccionados = [];
     this.actualizarMensaje();
+  }
+
+  public irARevisarNegocio( idNegocio : string){
+    window.sessionStorage.setItem('idNegocioGestion', idNegocio);
+    this.router.navigate(['/detalle-negocio']);
   }
 
 }

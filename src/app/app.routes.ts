@@ -17,7 +17,7 @@ export const routes: Routes = [
     { path: 'registro', component: RegistroComponent },
     { path: 'gestionNegocio', component: GestionNegocioComponent },
     { path: "crear-negocio", component: CrearNegocioComponent },
-    { path: "detalle-negocio/:codigo", component: DetalleNegocioComponent },
+    { path: "detalle-negocio", component: DetalleNegocioComponent },
     { path: "revisar-negocio", component: RevisarNegocioComponent },
     { path: "busqueda/:texto", component: BusquedaComponent },
     { path: "mi-perfil", component: MiPerfilComponent },
