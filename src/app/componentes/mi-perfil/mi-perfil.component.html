@@ -7,12 +7,16 @@
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Datos Personales</h3>
-            <p class="card-text"><strong>Nombre:</strong> Juan Pérez</p>
-            <p class="card-text"><strong>Email:</strong> mi email</p>
+            <p class="card-text"><strong>CUI:</strong></p> <input class="form-control" disabled value="{{ cliente.id }}">  
+            <p class="card-text"><strong>Nombre:</strong></p> <input class="form-control" [(ngModel)]="cliente.nombre" value="{{ cliente.nombre }}">  
+            <p class="card-text"><strong>Nombre usuario:</strong>  </p> <input class="form-control" [(ngModel)]="cliente.nickname" value="{{ cliente.nickname }}"> 
+            <p class="card-text"><strong>Email:</strong> </p> <input class="form-control" [(ngModel)]="cliente.email" value="{{ cliente.email }}">
+            <p class="card-text"><strong>Ciudad:</strong> </p> <input class="form-control" [(ngModel)]="cliente.ciudadResidencia" value="{{ cliente.ciudadResidencia }}">
+            <p class="card-text"><strong>Estado:</strong> </p><p class="text-bg-success"> {{ cliente.estado }} </p>
           </div>
         </div>
       </div>
-      <div class="col-12 mb-4">
+      <!--<div class="col-12 mb-4">
         <div class="card">
           <div class="card-body">
             <h3 class="card-title">Mis Negocios</h3>
@@ -23,9 +27,16 @@
             </ul>
           </div>
         </div>
-      </div>
-      <div class="col-12 text-center">
-        <button class="btn btn-danger">Eliminar Cuenta</button>
+      </div>-->
+      <div class="row">
+
+        <div class="col-md-6 col-sm-6 text-center">
+          <button class="btn btn-warning" (click)="actualizarPerfil()">Actualizar Cuenta</button>
+        </div>
+        <div class="col-md-6 col-sm-6 text-center">
+          <button class="btn btn-danger" (click)="desactivarCuenta(cliente.id)" >Desactivar Cuenta</button>
+        </div>
+        <app-alerta [alerta]="alerta"></app-alerta>
       </div>
     </div>
   </section>

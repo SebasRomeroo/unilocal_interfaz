@@ -13,16 +13,18 @@ import { RevisarNegocioComponent } from './componentes/moderador/revisar-negocio
 
 export const routes: Routes = [
     { path: '', component: InicioComponent },
+    //Rutas publicas
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
+    //Rutas cliente
     { path: 'gestionNegocio', component: GestionNegocioComponent },
     { path: "crear-negocio", component: CrearNegocioComponent },
     { path: "detalle-negocio", component: DetalleNegocioComponent },
-    { path: "revisar-negocio", component: RevisarNegocioComponent },
     { path: "busqueda/:texto", component: BusquedaComponent },
-    { path: "mi-perfil", component: MiPerfilComponent },
+    { path: "verPerfil", component: MiPerfilComponent },
     // Ruta Moderador
     { path: "aprobarNegocio", component: AprobarNegociosComponent },
+    { path: "revisar-negocio", component: RevisarNegocioComponent },
 
     { path: "**", pathMatch: "full", redirectTo: "" }
     ];

@@ -14,11 +14,15 @@
                 </li>
                 @if (userRole === 'CLIENTE') {
                     <a routerLink="/gestionNegocio" style="padding-right: 20px; text-decoration: none; color: black;"> <i
-                        class="fa fa-users"></i> Gestión Negocio</a>
+                        class="fa fa-maps"></i> Gestión Negocio</a>
                 }
                 @if (userRole === 'CLIENTE') {
                     <a routerLink="/buscarNegocio" style="padding-right: 20px; text-decoration: none; color: black;"> <i
                         class="fa fa-map"></i> Buscar Negocio</a>
+                }
+                @if (userRole === 'CLIENTE') {
+                    <a routerLink="/verPerfil" style="padding-right: 20px; text-decoration: none; color: black;"> <i
+                        class="fa fa-user"></i> Ver perfil</a>
                 }
                 @if (userRole === 'MODERADOR') {
                     <a routerLink="/aprobarNegocio" style="padding-right: 20px; text-decoration: none; color: black;"> <i
