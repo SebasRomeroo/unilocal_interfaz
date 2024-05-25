@@ -29,7 +29,7 @@ export class InicioComponent implements OnInit{
   alerta!:Alerta;
   
   ngOnInit(): void {
-    this.mapaService.crearMapa();
+    this.mapaService.crearMapa(true);
     console.log("carga aprobados");
     this.listarAprobados("APROBADO");
   }

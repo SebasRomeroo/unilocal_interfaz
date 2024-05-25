@@ -35,19 +35,15 @@ export class CrearNegocioComponent implements OnInit {
 
   public crearNegocio() {
     
-    // if (this.registroClienteDTO.fotoPerfil != "") {
+    this.registroNegocioDTO.horarios = this.horarios;
       this.negociosService.crear(this.registroNegocioDTO).subscribe({
-      next: (data) => {
-      this.alerta = new Alerta(data.respuesta, "success");
-      },
-      error: (error) => {
-      this.alerta = new Alerta(error.error.respuesta, "danger");
-      }
+        next: (data) => {
+        this.alerta = new Alerta(data.respuesta, "success");
+        },
+        error: (error) => {
+        this.alerta = new Alerta(error.error.respuesta, "danger");
+        }
       });
-      //} else {
-      this.alerta = new Alerta("Debe subir una imagen", "danger");
-      //}
-    console.log(this.registroNegocioDTO);
   }
   
   public agregarHorario() {

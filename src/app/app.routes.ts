@@ -8,6 +8,7 @@ import { CrearNegocioComponent } from './componentes/negocio/crear-negocio/crear
 import { DetalleNegocioComponent } from './componentes/negocio/detalle-negocio/detalle-negocio.component';
 import { BusquedaComponent } from './componentes/busqueda/busqueda.component';
 import { AprobarNegociosComponent } from './componentes/moderador/aprobar-negocios/aprobar-negocios.component';
+import { RevisarNegocioComponent } from './componentes/moderador/revisar-negocio/revisar-negocio.component';
 
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'gestionNegocio', component: GestionNegocioComponent },
     { path: "crear-negocio", component: CrearNegocioComponent },
     { path: "detalle-negocio/:codigo", component: DetalleNegocioComponent },
+    { path: "revisar-negocio", component: RevisarNegocioComponent },
     { path: "busqueda/:texto", component: BusquedaComponent },
     { path: "mi-perfil", component: MiPerfilComponent },
     // Ruta Moderador

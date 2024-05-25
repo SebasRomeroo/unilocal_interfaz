@@ -23,7 +23,8 @@
       "dom"
     ],
     "types": [
-      "jquery"
+      "jquery",
+      "mapbox-gl"
     ]
   },
   "angularCompilerOptions": {

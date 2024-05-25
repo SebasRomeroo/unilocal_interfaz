@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NegociosService } from '../../../servicios/negocios.service';
 import { ItemNegocioDTO } from '../../../dto/item-negocio-dto';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../../../servicios/token.service';
 import { HeaderComponent } from '../../header/header.component';
@@ -18,11 +18,12 @@ export class AprobarNegociosComponent implements OnInit {
    negociosAprobados: ItemNegocioDTO[];
    negociosPendientes: ItemNegocioDTO[];
    negociosRechazados: ItemNegocioDTO[];
-   router: any;
+
 
   constructor(
     private negocioService: NegociosService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router
   ) {
  
     this.listarNegociosAprobados();
@@ -31,7 +32,6 @@ export class AprobarNegociosComponent implements OnInit {
     this.negociosAprobados = [];
     this.negociosPendientes = [];
     this.negociosRechazados= [];
-    this.router = "";
   }
   ngOnInit(): void {
     
@@ -74,4 +74,8 @@ export class AprobarNegociosComponent implements OnInit {
     });
   }
 
+  public irARevisarNegocio( idNegocio : string){
+    window.sessionStorage.setItem('idNegocioGestion', idNegocio);
+    this.router.navigate(['/revisar-negocio']);
+  }
 }

@@ -58,6 +58,7 @@ export class TokenService {
     const token = this.getToken();
     if (token) {
     const values = this.decodePayload(token);
+    console.log('decodificado',values);
     return values.id;
     }
     return "";

@@ -13,6 +13,7 @@ import { HeaderComponent } from '../../header/header.component';
   templateUrl: './gestion-negocio.component.html',
   styleUrl: './gestion-negocio.component.css'
 })
+
 export class GestionNegocioComponent implements OnInit {
 
   seleccionados: ItemNegocioDTO[];

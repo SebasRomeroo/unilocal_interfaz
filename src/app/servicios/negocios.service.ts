@@ -5,6 +5,7 @@ import { MensajeDTO } from '../dto/mensaje-dto';
 import { TokenService } from './token.service';
 import { Observable } from 'rxjs';
 import { ActualizacionNegocioDTO } from '../dto/actualizacion-negocio-dto';
+import { RegistroRevisionNegocioDTO } from '../dto/registro-revision-negocio-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class NegociosService {
   
   // private negocios = ItemNegocioDTO[];
   private negociosURL = "http://localhost:8080/api/negocios";
-  private publicoURL = "http://localhost:8080/api/publico";
+  private moderadorURL = "http://localhost:8080/api/moderador";
 
   constructor(private http: HttpClient,private tokenService: TokenService) { 
 
@@ -36,9 +37,9 @@ export class NegociosService {
     return this.negocios.find((negocios: { codigoNegocio: string; }) => negocios.codigoNegocio == codigo);
   }/** */
   
-  /*public obtener(codigoNegocio: string): Observable<MensajeDTO> {
-    return this.http.get<MensajeDTO>(`${this.negociosURL}/obtener/${codigoNegocio}`);
-  }/** */
+  public obtener(codigoNegocio: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.negociosURL}/obtener-negocio/${codigoNegocio}`);
+  }
   
   public eliminar(codigoNegocio: string): Observable<MensajeDTO> {
     return this.http.delete<MensajeDTO>(`${this.negociosURL}/eliminar/${codigoNegocio}`);
@@ -59,5 +60,9 @@ export class NegociosService {
 
     const palabraLowerCase = palabra.toLowerCase();
     return this.negocios.filter((negocio: { nombre: string; }) => negocio.nombre.toLowerCase().includes(palabraLowerCase));
-    }/** */
+  }/** */
+
+  public crearRevision(revisionNueva: RegistroRevisionNegocioDTO): Observable<MensajeDTO> {
+    return this.http.post<MensajeDTO>(`${this.moderadorURL}/crear-revision`, revisionNueva);
+  }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs';
 import { ItemNegocioDTO } from '../dto/item-negocio-dto';
-import mapboxgl from 'mapbox-gl';
-
+import * as mapboxgl from 'mapbox-gl';
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,17 @@ export class MapaService {
   directions: any;
   marcadores: any[];
 
+  token : string;
+
   constructor() {
     this.marcadores = [];
+    this.token = 'pk.eyJ1IjoianVhbnNlLW1hcCIsImEiOiJjbHZzeHF6eHYxNW1zMmtxdGRsdXMxbDF1In0.VZSu_X9S8hM8Eoqq9rid5Q';
   }
   
-  public crearMapa() 
+  public crearMapa(requiereRutas : boolean = false) 
   {
     this.mapa = new mapboxgl.Map({
-    accessToken: 'pk.eyJ1IjoianVhbnNlLW1hcCIsImEiOiJjbHZzeHF6eHYxNW1zMmtxdGRsdXMxbDF1In0.VZSu_X9S8hM8Eoqq9rid5Q',
+    accessToken: this.token,
     container: 'mapa',
     //style: 'mapbox://styles/mapbox/streets-v11',
     style: 'mapbox://estilos/mapbox/satellite-streets-v12',
@@ -29,11 +32,22 @@ export class MapaService {
     });
     this.mapa.addControl(new mapboxgl.NavigationControl());
     this.mapa.addControl(
-    new mapboxgl.GeolocateControl({
-    positionOptions: { enableHighAccuracy: true },
-    trackUserLocation: true
-    })
+      new mapboxgl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true
+      })
     );
+
+    if (requiereRutas) {
+      this.mapa.on('load', () => {
+        const directions = new MapboxDirections({
+          accessToken: this.token,
+          lenguage: 'es',
+          unit:'metric'
+        });
+        this.mapa.addControl(directions, 'top-left');
+      });
+    }
   }
 
 

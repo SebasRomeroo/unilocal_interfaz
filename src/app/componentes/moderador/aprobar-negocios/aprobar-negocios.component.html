@@ -35,6 +35,65 @@
 
                 </td>
                 <td>
+                   <!--<a routerLink="/revisar-negocio/{{item.codigo}}"><i class="fa-solid fa-circle-info me-2"></i>Ver detalle</a>-->
+                   <button class="btn btn-success" (click)="irARevisarNegocio(item.codigo)" > <i class="fa-solid fa-circle-info me-2"></i>Ver detalle </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tbody class="table-group-divider">
+            @for (item of negociosAprobados; track $index) {
+            <tr>
+                
+                <td>
+                    <p>{{item.codigo}}</p>
+                </td>
+                <td>
+                    <p>{{item.nombre}}</p>
+                </td>
+                <td>
+                    <p>{{item.tipoNegocio}}</p>
+                </td>
+                <td>
+                    <img src="{{item.fotoPerfil}}" alt="{{item.nombre}}" class="img-fluid"
+                        style="max-width: 100px;">
+                </td>
+
+                <td>
+                  <span [ngClass]="{'text-bg-success': item.estadoNegocio == 'APROBADO', 'text-bg-danger': item.estadoNegocio == 'RECHAZADO', 'text-bg-warning':
+                                                        item.estadoNegocio == 'PENDIENTE' }" class="badge">{{item.estadoNegocio}}</span>
+
+                </td>
+                <td>
+                   <!-- <a routerLink="/detalle-negocio/{{item.codigo}}"><i class="fa-solid fa-circle-info me-2"></i>Ver detalle</a> -->
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tbody class="table-group-divider">
+            @for (item of negociosRechazados; track $index) {
+            <tr>
+                
+                <td>
+                    <p>{{item.codigo}}</p>
+                </td>
+                <td>
+                    <p>{{item.nombre}}</p>
+                </td>
+                <td>
+                    <p>{{item.tipoNegocio}}</p>
+                </td>
+                <td>
+                    <img src="{{item.fotoPerfil}}" alt="{{item.nombre}}" class="img-fluid"
+                        style="max-width: 100px;">
+                </td>
+
+                <td>
+                  <span [ngClass]="{'text-bg-success': item.estadoNegocio == 'APROBADO', 'text-bg-danger': item.estadoNegocio == 'RECHAZADO', 'text-bg-warning':
+                                                        item.estadoNegocio == 'PENDIENTE' }" class="badge">{{item.estadoNegocio}}</span>
+
+                </td>
+                <td>
                    <!-- <a routerLink="/detalle-negocio/{{item.codigo}}"><i class="fa-solid fa-circle-info me-2"></i>Ver detalle</a> -->
                 </td>
             </tr>
